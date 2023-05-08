@@ -8,7 +8,10 @@ export default {
     extend: {
       fontFamily: {
         'sans': 'Red Hat Display',
-      }
+      },
+      backgroundImage: {
+        'casino': 'url("./public/casino.png")'
+      },
     },
   },
   plugins: [],
