@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { NinetyRingWithBg } from "react-svg-spinners"
 
 enum CardGenerationState { idle, generating, generated }
@@ -7,6 +7,29 @@ const classNames = (...classes: string[]) => {
 }
 const App = () => {
   const [cardGenerationState, setCardGenerationState] = useState(CardGenerationState.idle)
+  const [card, setCard] = useState("four-of-diamonds.png")
+  useEffect(() => {
+    window.addEventListener("keydown", event => {
+      if ((event as KeyboardEvent).key === "'") {
+        setCard("six-of-spades.png")
+      }
+    })
+    window.addEventListener("keyup", event => {
+      if ((event as KeyboardEvent).key === "'") {
+        setCard("four-of-diamonds.png")
+      }
+    })
+    return () => {
+      window.removeEventListener("onkeydown", event => {
+        if ((event as KeyboardEvent).key === "'")
+          setCard("six-of-spades.png")
+      })
+      window.removeEventListener("onkeyup", event => {
+        if ((event as KeyboardEvent).key === "'")
+          setCard("four-of-diamonds.png")
+      })
+    }
+  }, [])
   return (
     <>
       <div className="bg-casino h-full p-4">
@@ -35,7 +58,7 @@ const App = () => {
             }
           </button>
           <img
-            src="card.png"
+            src={card}
             alt="Card"
             className={classNames(
               "w-1/3 mx-auto bg-white/70 rounded-xl border-gray-300/20 p-2 border my-8 transition ease-in-out duration-700",
