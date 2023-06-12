@@ -10,7 +10,7 @@ export default {
         'sans': 'Red Hat Display',
       },
       backgroundImage: {
-        'casino': 'url("./public/casino.png")'
+        'casino': 'url("/casino.png")'
       },
     },
   },
